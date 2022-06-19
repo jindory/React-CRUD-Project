@@ -1,14 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Create.css'
 
-function Create() {
+function Create({onCreate, setMode, countId, countIdF}) {
+  console.log(countId);
+  const [subject, setSubject] = useState('');
+  const [msg, setMsg] = useState('');
+  
+  const handleChangeSubject = (event) => {
+    setSubject(event.target.value);
+  };
+
+  const handleChangeMsg = (event) => {
+    return setMsg(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    const msgCard = {
+      id:countId,
+      username: 'guest',
+      title: subject,
+      content:msg,
+      createdAt: new Date().toLocaleDateString('ko-kr'),
+    }
+    countIdF();
+    setMode('WELCOME');
+    onCreate({msgCard}); //재배열
+  }
+
+  const handleButtonCancleClick = () => {
+    setMode('WELCOME');
+  }
   return (
-    <div className='CreateContent'>
-      <input></input>
-      <textarea></textarea>
+    <div className='CreateContent con-panal'>
+      <input 
+      className='ipt-form' 
+      placeholder='제목 입력'
+      onChange={handleChangeSubject}
+      ></input>
+      <textarea 
+      className='ipt-form' 
+      placeholder='내용 입력'
+      onChange={handleChangeMsg}
+      ></textarea>
       <div>
-        <button>취소</button>
-        <button>저장</button>
+        <button onClick={handleButtonCancleClick}>취소</button>
+        <button onClick={handleButtonClick}>저장</button>
       </div>
     </div>
   )
