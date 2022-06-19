@@ -4,7 +4,7 @@
 *{box-sizing: border-box;}
 *:hover{transition: all .5s;}
 body{min-height:100vh;font-size:18px;color:#ddd;background-color:#000;font-family: 'Montserrat','Noto Sans KR' sans-serif;}
-
+div{line-height:1.8em}
 .con-panal{padding:15px}
 .sub-i{opacity: .3;}
 
@@ -29,19 +29,20 @@ textarea.ipt-form{min-height:55vh}
 .table-title{width:100%;display: flex;justify-content: space-between;align-items: flex-end;padding-bottom:8px;font-size:20px;font-weight: bold;}
 .row{display: flex;justify-content:space-between;align-items: center;}
 
-.lst-card{width:100%;margin:8px 0;padding:20px 30px;border:1px solid #383838;border-radius:15px;cursor: pointer;font-weight: 500;}
+.lst-card{width:100%;margin:8px 0;padding:17px 30px;border:1px solid #383838;border-radius:15px;cursor: pointer;font-weight: 500;}
 .lst-card:hover{border-color:#DEDEFB;border-color:#999899}
 .lst-num{margin-right:10px}
 .lst-num, .lst-data{font-family:'Montserrat';font-size:15px;font-weight: 300;}
 
+.pg-con{min-height:300px}
 .pg-detail, .CreateContent{background:#141415;margin:0;border-radius: 0;height: 100vh;}
 .CreateContent{align-items: flex-start;padding:140px 30px 30px 30px;text-align: left;}
-.CreateContent .lb{margin-bottom:6px;font-size:13px;opacity: .4;font-family: 'Montserrat';}
-.btn-group{display: flex;width:100%;justify-content: flex-end;}
+.CreateContent .lb{font-size:13px;opacity: .4;font-family: 'Montserrat';}
+.btn-group{display: flex;width:100%;justify-content: flex-end;margin-top:30px}
 .btn-group button{margin-left:7px}
-.pg-detail h3{position:relative;min-height:80px;margin:15px 0;margin-bottom:30px;padding-bottom:20px;font-size:45px;font-weight: bold;}
+.pg-detail h3{position:relative;min-height:80px;margin:15px 0;margin-bottom:30px;padding-bottom:20px;font-size:45px;font-weight: bold;line-height: 1.25em;}
 .pg-detail h3:before{content:'';display:inline-block;position:absolute;bottom:0;width:80px;height:4px;background:#333;}
-.pg-detail .pd-date{display:inline-block;margin-top:65px;font-size:20px}
+.pg-detail .pd-date{display:inline-block;margin-top:65px;font-family: 'Montserrat';font-size:20px}
 
 @media ( max-width: 1000px ) {
   .container{display: block;}

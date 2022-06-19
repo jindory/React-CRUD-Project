@@ -5,7 +5,7 @@ import PrintContent from './pages/PrintContent'
 import Update from './pages/Update'
 import dummyDates from './resource/dummyData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faGear, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import './App.css'
 
@@ -44,7 +44,11 @@ function App() {
           <span className="pd-date">{new Date(data[0].createdAt).toLocaleDateString('ko-kr')}</span>
           <h3>{data[0].title}</h3>
           </div>
-          <div>{data[0].content}</div>
+          <div className="pg-con">{data[0].content}</div>
+          <div className="btn-group">
+              <button className="btn-sm sub" value={data[0].id} onClick={handleEdt}><FontAwesomeIcon icon={faGear} className="sub-i" /> 수정</button>
+              <button className="btn-sm sub" value={data[0].id} onClick={handleDlt}><FontAwesomeIcon icon={faTrash} className="sub-i" /> 삭제</button>
+          </div>
       </div>
     )
   }
