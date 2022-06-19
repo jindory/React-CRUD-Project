@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 function Update({id, intdata, data, setMode, setData, msgUpdata}){
     const [title, setTitle] = useState(data[0].title);
@@ -54,7 +56,7 @@ function Update({id, intdata, data, setMode, setData, msgUpdata}){
           ></textarea>
           <div className="btn-group">
             <button className="btn-sm sub" onClick={handleButtonCancleClick}>취소</button>
-            <button className="btn-sm" value={crInd} onClick={handleButtonClick}>수정완료</button>
+            <button className="btn-sm" value={crInd} onClick={handleButtonClick}><FontAwesomeIcon icon={faCheck} /> 수정완료</button>
             {/* <button onClick={onUpdate}>수정완료</button> */}
           </div>
         </div>

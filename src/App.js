@@ -4,6 +4,9 @@ import ContentList from './pages/ContentList'
 import PrintContent from './pages/PrintContent'
 import Update from './pages/Update'
 import dummyDates from './resource/dummyData';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+
 import './App.css'
 
 function App() {
@@ -117,7 +120,7 @@ function App() {
       <div className="table con-panal">
         <div className='table-title'>
           <span>CRUD History</span>
-          <button onClick={entryHandleBtn}>글쓰기</button>
+          <button onClick={entryHandleBtn}><FontAwesomeIcon icon={faCirclePlus}/> 글쓰기</button>
         </div>
         {msgDataList}
       </div>

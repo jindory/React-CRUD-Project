@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import './Create.css'
 
 function Create({onCreate, setMode, countId, countIdF}) {
@@ -46,7 +48,7 @@ function Create({onCreate, setMode, countId, countIdF}) {
       ></textarea>
       <div class="btn-group">
         <button className="btn-sm sub" onClick={handleButtonCancleClick}>취소</button>
-        <button className="btn-sm" onClick={handleButtonClick}>저장</button>
+        <button className="btn-sm" onClick={handleButtonClick}><FontAwesomeIcon icon={faCheck} /> 저장</button>
       </div>
     </div>
   )
