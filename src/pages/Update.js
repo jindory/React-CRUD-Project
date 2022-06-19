@@ -33,6 +33,10 @@ function Update({id, intdata, data, setMode, setData, msgUpdata}){
         msgUpdata();
         setData([...newIntData]);
     }
+    
+    const handleButtonCancleClick = () => {
+        setMode('READ');
+    }
 
     return (
         <div className='CreateContent con-panal'>
@@ -49,7 +53,7 @@ function Update({id, intdata, data, setMode, setData, msgUpdata}){
           onChange={changeContent}
           ></textarea>
           <div>
-            <button >취소</button>
+            <button onClick={handleButtonCancleClick}>취소</button>
             <button value={crInd} onClick={handleButtonClick}>수정완료</button>
             {/* <button onClick={onUpdate}>수정완료</button> */}
           </div>
