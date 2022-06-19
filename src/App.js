@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Create from './pages/Create'
 import ContentList from './pages/ContentList'
 import PrintContent from './pages/PrintContent'
@@ -18,12 +18,14 @@ function App() {
   const [conDate, setConDate] = useState(data[0].createdAt);
   const [conMsg, setConMsg] = useState(data[0].content);
   const [prevId, setPrevId] = useState('');
-  
+
+
   const countId = idxNum;
   function countIdF (){
     setIdxNum(countId=> countId+1)
   }
 
+  // 목록 챠르륵
   const msgDataList = data.map(data => {
     return(
       <ContentList msgList={data} key={data.id} clickCardHandler={msgPrint}/>
@@ -33,7 +35,7 @@ function App() {
   const msgCard = ({msgCard}) => {
     const newData = [msgCard, ...data];
     console.log(newData);
-    setData(newData); //뭔가 이쯤에서 뭔일이 있어나는듯 -ㅅ-;;; 담아오는 거 다시 확인해보기..
+    setData(newData);
   }
 
   // 내용보기 - 최근 
@@ -99,13 +101,14 @@ function App() {
     setData(props);
   }
 
+  function handleSetMode(props){
+    setMode(props);
+  }
+
   function entryHandleBtn(){
     setMode('CREATE');
   }
 
-  function handleSetMode(props){
-    setMode(props);
-  }
 
 
   let content = null;
