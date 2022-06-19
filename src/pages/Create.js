@@ -31,20 +31,22 @@ function Create({onCreate, setMode, countId, countIdF}) {
     setMode('WELCOME');
   }
   return (
-    <div className='CreateContent con-panal'>
+    <div className='CreateContent table'>
+      <span class="lb">SUBJECT</span>
       <input 
       className='ipt-form' 
       placeholder='제목 입력'
       onChange={handleChangeSubject}
       ></input>
+      <span class="lb">CONTENT</span>
       <textarea 
       className='ipt-form' 
       placeholder='내용 입력'
       onChange={handleChangeMsg}
       ></textarea>
-      <div>
-        <button onClick={handleButtonCancleClick}>취소</button>
-        <button onClick={handleButtonClick}>저장</button>
+      <div class="btn-group">
+        <button className="btn-sm sub" onClick={handleButtonCancleClick}>취소</button>
+        <button className="btn-sm" onClick={handleButtonClick}>저장</button>
       </div>
     </div>
   )

@@ -52,9 +52,9 @@ function Update({id, intdata, data, setMode, setData, msgUpdata}){
           value={msg}
           onChange={changeContent}
           ></textarea>
-          <div>
-            <button onClick={handleButtonCancleClick}>취소</button>
-            <button value={crInd} onClick={handleButtonClick}>수정완료</button>
+          <div className="btn-group">
+            <button className="btn-sm sub" onClick={handleButtonCancleClick}>취소</button>
+            <button className="btn-sm" value={crInd} onClick={handleButtonClick}>수정완료</button>
             {/* <button onClick={onUpdate}>수정완료</button> */}
           </div>
         </div>

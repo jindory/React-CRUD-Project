@@ -36,10 +36,10 @@ function App() {
   // 내용보기 - 최근 
   function LatestContent(){
     return(
-      <div className='con-panal'>
+      <div className='pg-detail con-panal'>
           <div>
+          <span className="pd-date">{new Date(data[0].createdAt).toLocaleDateString('ko-kr')}</span>
           <h3>{data[0].title}</h3>
-          <span>{new Date(data[0].createdAt).toLocaleDateString('ko-kr')}</span>
           </div>
           <div>{data[0].content}</div>
       </div>
@@ -116,7 +116,7 @@ function App() {
     <div className='container'>
       <div className="table con-panal">
         <div className='table-title'>
-          <span>목록</span>
+          <span>CRUD History</span>
           <button onClick={entryHandleBtn}>글쓰기</button>
         </div>
         {msgDataList}
