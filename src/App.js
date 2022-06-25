@@ -20,6 +20,29 @@ function App() {
   const [prevId, setPrevId] = useState('');
 
 
+  useEffect(() => {
+    getDis();
+  },[])
+
+  const getDis = (()=>{
+    return fetch(`http://localhost:3001/discussions`)
+    .then((data)=> data.json())
+    .then((data)=> {setData(data)});
+  })
+
+  const delDis =((id)=>{
+    fetch(`http://localhost:3001/discussions/${id}`, { 
+      method: 'DELETE', 
+    })
+    .then((res) => {
+      if (res.status === 202 || 204) {
+        getDis()
+      }
+    })
+  })
+
+  
+
   const countId = idxNum;
   function countIdF (){
     setIdxNum(countId=> countId+1)
