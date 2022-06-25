@@ -108,18 +108,31 @@ function App() {
     setConMsg (sltData[0].content);
     console.log('읽기', sltData);
     setMode('READ');
-  }
+  };
 
   // 내용보기 - 업데이트한 내용
-  // function msgUpdata() {
-  //   const updData = data.filter(data => {return(data.id === Number(prevId))});
-  //   setConId (updData[0].id);
-  //   setConSubject (updData[0].title);
-  //   setConDate (new Date(updData[0].createdAt).toLocaleDateString('ko-kr'));
-  //   setConMsg (updData[0].content);
-  //   console.log('담기담기', updData);
-  //   setMode('READ');
-  // }
+  function msgUpdata(crInd) {
+    // console.log(crInd.crInd);
+    return fetch(`http://localhost:3001/discussions/${crInd.crInd}`)
+    .then((data)=> data.json())
+    .then((data)=> {
+      setConId(data.id);
+      setConSubject(data.title);
+      setConMsg(data.content);
+      getDis();
+      setMode('READ');
+    });
+
+    // const updData = data.find(data => { return(data.id === crInd.crInd) });
+    // console.log(crInd.crInd, data, updData)
+    // setConId (updData[0].id);
+    // setConSubject (updData[0].title);
+    // setConDate (new Date(updData[0].createdAt).toLocaleDateString('ko-kr'));
+    // setConMsg (updData[0].content);
+    // console.log('담기담기', updData);
+    // console.log('푸호호');
+    
+  }
 
   // 리스트 렌더 - 삭제
   // function handleDlt(event){
@@ -162,7 +175,7 @@ function App() {
   } else if (mode === 'CREATE'){
     content = <Create onCreate={addDis} setMode={handleSetMode} data={data} countId={countId} countIdF={countIdF}/>
   } else if (mode === 'UPDATE'){
-    content = <Update id={prevId} upData={getDis} setData={setDataF} intdata={data} data={edtData} setMode={handleSetMode}/>
+    content = <Update id={prevId} upData={getDis} setData={setDataF} intdata={data} data={edtData} setMode={handleSetMode} msgUpdata={msgUpdata}/>
   }
 
   return (

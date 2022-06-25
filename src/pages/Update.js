@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function Update({id, intdata, data, setMode, upData}){
+function Update({id, data, setMode, upData, msgUpdata}){
     const [title, setTitle] = useState(data[0].title);
     const [msg, setMsg] = useState(data[0].content);
     // const [newIntData, setNewIntData] = useState(...intdata);
@@ -35,8 +35,7 @@ function Update({id, intdata, data, setMode, upData}){
             body: JSON.stringify(newData)
         })
         .then((res) => {
-            upData();
-            setMode('READ');
+            msgUpdata({crInd});
         })
         
         // const msgCard = {
