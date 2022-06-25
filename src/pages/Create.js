@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import './Create.css'
 
-function Create({onCreate, setMode, countId, countIdF}) {
-  console.log(countId);
+function Create({onCreate, setMode, countIdF}) {
+
   const [subject, setSubject] = useState('');
   const [msg, setMsg] = useState('');
   
@@ -17,16 +17,8 @@ function Create({onCreate, setMode, countId, countIdF}) {
   };
 
   const handleButtonClick = () => {
-    const msgCard = {
-      id:countId,
-      username: 'guest',
-      title: subject,
-      content:msg,
-      createdAt: new Date().toLocaleDateString('ko-kr'),
-    }
+    onCreate({ subject, msg })
     countIdF();
-    setMode('WELCOME');
-    onCreate({msgCard}); //재배열
   }
 
   const handleButtonCancleClick = () => {
@@ -34,19 +26,19 @@ function Create({onCreate, setMode, countId, countIdF}) {
   }
   return (
     <div className='CreateContent table'>
-      <span class="lb">SUBJECT</span>
+      <span className="lb">SUBJECT</span>
       <input 
       className='ipt-form' 
       placeholder='제목 입력'
       onChange={handleChangeSubject}
       ></input>
-      <span class="lb">CONTENT</span>
+      <span className="lb">CONTENT</span>
       <textarea 
       className='ipt-form' 
       placeholder='내용 입력'
       onChange={handleChangeMsg}
       ></textarea>
-      <div class="btn-group">
+      <div className="btn-group">
         <button className="btn-sm sub" onClick={handleButtonCancleClick}>취소</button>
         <button className="btn-sm" onClick={handleButtonClick}><FontAwesomeIcon icon={faCheck} /> 저장</button>
       </div>

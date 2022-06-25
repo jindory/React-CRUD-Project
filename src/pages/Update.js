@@ -15,25 +15,44 @@ function Update({id, intdata, data, setMode, setData, msgUpdata}){
     function changeContent(event){
         setMsg(event.target.value);
     }
+    
 
-    const handleButtonClick = () => {
+    const handleButtonClick = (event) => {
+        const filterId = event.target.value;
+        const newData = {
+            username:'gest',
+            title:title,
+            content: msg,
+            createdAt: new Date().toLocaleString()
+        };
+        console.log(newData);
+        return fetch(`http://localhost:3001/discussions/${filterId}`, { 
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newData)
+        })
+        .then((res) => {
+            if (res.status === 201) {
+            }
+        })
         
-        // const updData = data.filter(data => data.id === crInd);
-        const msgCard = {
-            id:Number(id),
-            username: 'guest',
-            title: title,
-            content:msg,
-            createdAt: new Date().toLocaleDateString('ko-kr'),
-        }
+        // const msgCard = {
+        //     id:Number(id),
+        //     username: 'guest',
+        //     title: title,
+        //     content:msg,
+        //     createdAt: new Date().toLocaleDateString('ko-kr'),
+        // }
         
-        const reverseData = intdata.reverse();
-        reverseData[crInd-1] = msgCard; //수정객체 챡 넣기
-        setNewIntData(reverseData.reverse());
+        // const reverseData = intdata.reverse();
+        // reverseData[crInd-1] = msgCard; //수정객체 챡 넣기
+        // setNewIntData(reverseData.reverse());
 
         // console.log('기존객체',...intdata);
-        msgUpdata();
-        setData([...newIntData]);
+        // setData([...newIntData]);
     }
     
     const handleButtonCancleClick = () => {

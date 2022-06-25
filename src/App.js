@@ -11,38 +11,62 @@ import './App.css'
 
 function App() {
   const [mode, setMode] = useState('WELCOME');
-  const [data, setData] = useState(dummyDates);
+  const [data, setData] = useState([dummyDates]);
   const [conId, setConId] = useState();
-  const [idxNum, setIdxNum] = useState(data.length+1);
+  const [idxNum, setIdxNum] = useState([]);
   const [conSubject, setConSubject] = useState(data[0].title);
   const [conDate, setConDate] = useState(data[0].createdAt);
   const [conMsg, setConMsg] = useState(data[0].content);
   const [prevId, setPrevId] = useState('');
-
 
   useEffect(() => {
     getDis();
   },[])
 
   const getDis = (()=>{
-    return fetch(`http://localhost:3001/discussions`)
+    return fetch(`http://localhost:3001/discussions/`)
     .then((data)=> data.json())
     .then((data)=> {setData(data)});
   })
 
-  const delDis =((id)=>{
-    fetch(`http://localhost:3001/discussions/${id}`, { 
-      method: 'DELETE', 
+  const delDis = ((event)=>{
+    setMode('WELCOME');
+    const filterId = event.target.value;
+    return fetch(`http://localhost:3001/discussions/${filterId}`, {
+      method: 'DELETE',
     })
     .then((res) => {
-      if (res.status === 202 || 204) {
+      if (res.status === 201) {
         getDis()
       }
     })
   })
 
+  const addDis = (({ countId, subject, msg })=>{
+    const newData = {
+      id:countId,
+      username:'gest',
+      title:subject,
+      content: msg,
+      createdAt: new Date().toLocaleString()
+    };
+    console.log(newData);
+    return fetch(`http://localhost:3001/discussions/`, { 
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newData)
+    })
+    .then((res) => {
+      if (res.status === 201) {
+        getDis();
+        setMode('WELCOME');
+      }
+    })
+  })
   
-
   const countId = idxNum;
   function countIdF (){
     setIdxNum(countId=> countId+1)
@@ -55,11 +79,11 @@ function App() {
     )
   })
 
-  const msgCard = ({msgCard}) => {
-    const newData = [msgCard, ...data];
-    console.log(newData);
-    setData(newData);
-  }
+  // const msgCard = ({msgCard}) => {
+  //   const newData = [msgCard, ...data];
+  //   console.log(newData);
+  //   setData(newData);
+  // }
 
   // 내용보기 - 최근 
   function LatestContent(){
@@ -71,8 +95,8 @@ function App() {
           </div>
           <div className="pg-con">{data[0].content}</div>
           <div className="btn-group">
-              <button className="btn-sm sub" value={data[0].id} onClick={handleEdt}><FontAwesomeIcon icon={faGear} className="sub-i" /> 수정</button>
-              <button className="btn-sm sub" value={data[0].id} onClick={handleDlt}><FontAwesomeIcon icon={faTrash} className="sub-i" /> 삭제</button>
+              <button className="btn-sm sub" value={data[0].id} onClick={delDis}><FontAwesomeIcon icon={faGear} className="sub-i" /> 수정</button>
+              <button className="btn-sm sub" value={data[0].id} onClick={delDis}><FontAwesomeIcon icon={faTrash} className="sub-i" /> 삭제</button>
           </div>
       </div>
     )
@@ -91,24 +115,24 @@ function App() {
   }
 
   // 내용보기 - 업데이트한 내용
-  function msgUpdata() {
-    const updData = data.filter(data => {return(data.id === Number(prevId))});
-    setConId (updData[0].id);
-    setConSubject (updData[0].title);
-    setConDate (new Date(updData[0].createdAt).toLocaleDateString('ko-kr'));
-    setConMsg (updData[0].content);
-    console.log('담기담기', updData);
-    setMode('READ');
-  }
+  // function msgUpdata() {
+  //   const updData = data.filter(data => {return(data.id === Number(prevId))});
+  //   setConId (updData[0].id);
+  //   setConSubject (updData[0].title);
+  //   setConDate (new Date(updData[0].createdAt).toLocaleDateString('ko-kr'));
+  //   setConMsg (updData[0].content);
+  //   console.log('담기담기', updData);
+  //   setMode('READ');
+  // }
 
   // 리스트 렌더 - 삭제
-  function handleDlt(event){
-    const filterId = event.target.value;
-    const delData = data.filter(data => {return(data.id !== Number(filterId))});
-    const newData = [...delData];
-    setData(newData);
-    setMode('WELCOME');
-  }
+  // function handleDlt(event){
+  //   const filterId = event.target.value;
+  //   const delData = data.filter(data => {return(data.id !== Number(filterId))});
+  //   const newData = [...delData];
+  //   setData(newData);
+  //   setMode('WELCOME');
+  // }
 
   // 리스트 렌더 - 수정
   const edtData = data.filter(data => {return(data.id === Number(prevId))});
@@ -138,11 +162,11 @@ function App() {
   if(mode === 'WELCOME'){
     content = <LatestContent />;
   } else if (mode === 'READ'){
-    content = <PrintContent id={conId} title={conSubject} body={conMsg} date={conDate} handleEdit={handleEdt} handleDelete={handleDlt}/>;
+    content = <PrintContent id={conId} title={conSubject} body={conMsg} date={conDate} handleEdit={handleEdt} handleDelete={delDis}/>;
   } else if (mode === 'CREATE'){
-    content = <Create onCreate={msgCard} setMode={handleSetMode} data={data} countId={countId} countIdF={countIdF}/>
+    content = <Create onCreate={addDis} setMode={handleSetMode} data={data} countId={countId} countIdF={countIdF}/>
   } else if (mode === 'UPDATE'){
-    content = <Update id={prevId} setData={setDataF} intdata={data} data={edtData} setMode={handleSetMode} msgUpdata={msgUpdata}/>
+    content = <Update id={prevId} setData={setDataF} intdata={data} data={edtData} setMode={handleSetMode}/>
   }
 
   return (
