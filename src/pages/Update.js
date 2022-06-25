@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function Update({id, intdata, data, setMode, setData, msgUpdata}){
+function Update({id, intdata, data, setMode, upData}){
     const [title, setTitle] = useState(data[0].title);
     const [msg, setMsg] = useState(data[0].content);
-    const [newIntData, setNewIntData] = useState(...intdata);
+    // const [newIntData, setNewIntData] = useState(...intdata);
 
     let crInd = Number(id);
     function changeSubject(event){
@@ -35,8 +35,8 @@ function Update({id, intdata, data, setMode, setData, msgUpdata}){
             body: JSON.stringify(newData)
         })
         .then((res) => {
-            if (res.status === 201) {
-            }
+            upData();
+            setMode('READ');
         })
         
         // const msgCard = {

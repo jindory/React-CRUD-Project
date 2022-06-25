@@ -36,9 +36,7 @@ function App() {
       method: 'DELETE',
     })
     .then((res) => {
-      if (res.status === 201) {
-        getDis()
-      }
+      getDis()
     })
   })
 
@@ -60,10 +58,8 @@ function App() {
       body: JSON.stringify(newData)
     })
     .then((res) => {
-      if (res.status === 201) {
-        getDis();
-        setMode('WELCOME');
-      }
+      getDis();
+      setMode('WELCOME');
     })
   })
   
@@ -95,7 +91,7 @@ function App() {
           </div>
           <div className="pg-con">{data[0].content}</div>
           <div className="btn-group">
-              <button className="btn-sm sub" value={data[0].id} onClick={delDis}><FontAwesomeIcon icon={faGear} className="sub-i" /> 수정</button>
+              <button className="btn-sm sub" value={data[0].id} onClick={handleEdt}><FontAwesomeIcon icon={faGear} className="sub-i" /> 수정</button>
               <button className="btn-sm sub" value={data[0].id} onClick={delDis}><FontAwesomeIcon icon={faTrash} className="sub-i" /> 삭제</button>
           </div>
       </div>
@@ -166,7 +162,7 @@ function App() {
   } else if (mode === 'CREATE'){
     content = <Create onCreate={addDis} setMode={handleSetMode} data={data} countId={countId} countIdF={countIdF}/>
   } else if (mode === 'UPDATE'){
-    content = <Update id={prevId} setData={setDataF} intdata={data} data={edtData} setMode={handleSetMode}/>
+    content = <Update id={prevId} upData={getDis} setData={setDataF} intdata={data} data={edtData} setMode={handleSetMode}/>
   }
 
   return (
