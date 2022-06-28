@@ -75,12 +75,6 @@ function App() {
     )
   })
 
-  // const msgCard = ({msgCard}) => {
-  //   const newData = [msgCard, ...data];
-  //   console.log(newData);
-  //   setData(newData);
-  // }
-
   // 내용보기 - 최근 
   function LatestContent(){
     return(
@@ -122,26 +116,10 @@ function App() {
       getDis();
       setMode('READ');
     });
-
-    // const updData = data.find(data => { return(data.id === crInd.crInd) });
-    // console.log(crInd.crInd, data, updData)
-    // setConId (updData[0].id);
-    // setConSubject (updData[0].title);
-    // setConDate (new Date(updData[0].createdAt).toLocaleDateString('ko-kr'));
-    // setConMsg (updData[0].content);
-    // console.log('담기담기', updData);
-    // console.log('푸호호');
     
   }
 
-  // 리스트 렌더 - 삭제
-  // function handleDlt(event){
-  //   const filterId = event.target.value;
-  //   const delData = data.filter(data => {return(data.id !== Number(filterId))});
-  //   const newData = [...delData];
-  //   setData(newData);
-  //   setMode('WELCOME');
-  // }
+ 
 
   // 리스트 렌더 - 수정
   const edtData = data.filter(data => {return(data.id === Number(prevId))});
@@ -164,8 +142,6 @@ function App() {
   function entryHandleBtn(){
     setMode('CREATE');
   }
-
-
 
   let content = null;
   if(mode === 'WELCOME'){

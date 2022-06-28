@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faGear } from '@fortawesome/free-solid-svg-icons';
 
 function PrintContent({id, title, body, date, handleEdit, handleDelete}) {
+    date = new Date().toISOString();
+    date = date.slice(0, 10);
     return(
         <div className='con-panal pg-detail'>
             <div>
